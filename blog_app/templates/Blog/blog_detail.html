@@ -4,20 +4,29 @@
 
 {% block awsome %}{{object.title}}{% endblock %}
 
+
+
 {% block content %}
 
-<h1>
-	{{ object.title }}
+{% if user.is_authenticated %}
+	<h1>
+		{{ object.title }}
 
-</h1>
-<hr>
-<h5>By {{object.author}}</h5>
+	</h1>
+	<hr>
+	<h5>By {{object.author}}</h5>
 
 
-<p>
-	{{object.content}}
-</p>
+	<p>
+		{{object.content}}
+	</p>
 
-<a href="{% url 'home' %}" class="btn btn-dark">Back</a>
+	<a href="{% url 'home' %}" class="btn btn-dark">Back</a>
+
+{% else %}
+
+	<h3>Your are not logged</h3>
+
+{% endif %}
 
 {% endblock %}

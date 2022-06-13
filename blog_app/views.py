@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import ListView ,DetailView,CreateView,UpdateView
+from django.views.generic import ListView ,DetailView,CreateView,UpdateView,DeleteView
 from blog_app.models import Blog
 from .forms import Add_blog
-
+from django.urls import reverse_lazy
 
 
 class Home(ListView):
@@ -10,6 +10,8 @@ class Home(ListView):
 	model = Blog
 
 	template_name = 'Blog/home.html'
+
+	ordering = ['-pub_date']
 
 
 class Detail(DetailView):
@@ -35,3 +37,11 @@ class Update(UpdateView):
 	template_name = 'Blog/Update_blog.html'
 
 	fields = ['title' , 'content']
+
+
+class Delete(DeleteView):
+
+	model = Blog
+	template_name = 'Blog/Delete_blog.html'
+
+	success_url = reverse_lazy('home')
